@@ -1,0 +1,30 @@
+<br>
+<a href="dashboard/<%= current_user.id %>">My Dashboard</a>
+<br>
+<h3>Hello, <%= current_user.first_name %>!</h3>
+<br>
+<h1>All Products</h1>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Product</th>
+            <th>Seller</th>
+            <th>Posted Date</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if @products %>
+            <% @products.each do |product| %>
+                <tr>
+                    <td><%= product.name %></td>
+                    <td><%= product.user.first_name %> <%= product.user.last_name %></td>
+                    <td><%= product.created_at.strftime("%a. %B %e, %Y @ %I:%M%P") %></td>
+                    <td>$<%= product.amount %>.00</td>
+                    <td><a href="/purchases/<%= product.id %>" >Buy</a></td>
+                </tr>
+            <% end %>
+        <% end %>
+    </tbody>
+</table>
